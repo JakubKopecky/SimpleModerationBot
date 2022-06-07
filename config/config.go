@@ -4,10 +4,11 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
+	"os"
 )
 
 type ConfigStruct struct {
-	Token     string   `json:"Token"`
+	Token     string
 	Message   string   `json:"Message"`
 	BlackList []string `json:"BlackList"`
 }
@@ -24,6 +25,8 @@ func LoadConfig() *ConfigStruct {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+
+	loadedConfig.Token = os.Getenv("BOTTOKEN")
 
 	return &loadedConfig
 }
