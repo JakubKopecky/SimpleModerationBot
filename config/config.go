@@ -6,29 +6,23 @@ import (
 	"log"
 )
 
-var (
-	LoadedConfiguration *configStruct
-)
-
-type configStruct struct {
+type ConfigStruct struct {
 	Token     string   `json:"Token"`
 	BlackList []string `json:"BlackList"`
 }
 
-func ReadConfig() error {
+func LoadConfig() *ConfigStruct {
 	log.Print("Reading config file...")
-
 	file, err := ioutil.ReadFile("./config.json")
 	if err != nil {
-		log.Panic(err)
-		return err
+		log.Fatal(err.Error())
 	}
 
-	err = json.Unmarshal(file, &LoadedConfiguration)
+	var loadedConfig = ConfigStruct{}
+	err = json.Unmarshal(file, &loadedConfig)
 	if err != nil {
-		log.Panic(err)
-		return err
+		log.Fatal(err.Error())
 	}
 
-	return nil
+	return &loadedConfig
 }
