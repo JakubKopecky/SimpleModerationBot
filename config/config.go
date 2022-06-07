@@ -26,7 +26,8 @@ func LoadConfig() *ConfigStruct {
 		log.Fatal(err.Error())
 	}
 
-	loadedConfig.Token = os.Getenv("BOTTOKEN")
+	loadedConfig.Token = os.Getenv("BOT_TOKEN")
+	log.Print("Token is " + loadedConfig.Token)
 
 	return &loadedConfig
 }
