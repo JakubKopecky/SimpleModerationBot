@@ -14,7 +14,8 @@ var (
 )
 
 func Start() {
-	goBot, err := discordgo.New("Bot " + config.Token)
+
+	goBot, err := discordgo.New("Bot " + config.LoadedConfiguration.Token)
 	if err != nil {
 		log.Panic(err)
 		return
@@ -50,7 +51,7 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 func containsBlacklisted(m *discordgo.MessageCreate) (bool, *string) {
 	msgLower := strings.ToLower(m.Content)
 
-	for _, word := range *config.BlackList {
+	for _, word := range config.LoadedConfiguration.BlackList {
 		word = strings.ToLower(word)
 		if match, _ := regexp.MatchString("\\b"+word+"\\b", msgLower); match {
 			return true, &word

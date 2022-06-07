@@ -7,10 +7,7 @@ import (
 )
 
 var (
-	Token     string
-	BlackList *[]string
-
-	config *configStruct
+	LoadedConfiguration *configStruct
 )
 
 type configStruct struct {
@@ -27,14 +24,11 @@ func ReadConfig() error {
 		return err
 	}
 
-	err = json.Unmarshal(file, &config)
+	err = json.Unmarshal(file, &LoadedConfiguration)
 	if err != nil {
 		log.Panic(err)
 		return err
 	}
-
-	Token = config.Token
-	BlackList = &config.BlackList
 
 	return nil
 }
