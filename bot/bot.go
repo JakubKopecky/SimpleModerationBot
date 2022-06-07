@@ -2,6 +2,7 @@ package bot
 
 import (
 	"SimpleModerationBot/config"
+	"fmt"
 	"log"
 	"regexp"
 	"strings"
@@ -50,9 +51,10 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	if blacklisted, msg := containsBlacklisted(m); blacklisted {
-		log.Print("found blacklisted word \"" + *msg + "\"")
-		s.ChannelMessageSend(m.ChannelID, "Stop using `"+*msg+"`. Are you 12?")
+	if blacklisted, word := containsBlacklisted(m); blacklisted {
+		log.Print("found blacklisted word \"" + *word + "\"")
+		msg := fmt.Sprintf(currentConfig.Message, *word)
+		s.ChannelMessageSend(m.ChannelID, msg)
 	}
 }
 

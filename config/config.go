@@ -8,6 +8,7 @@ import (
 
 type ConfigStruct struct {
 	Token     string   `json:"Token"`
+	Message   string   `json:"Message"`
 	BlackList []string `json:"BlackList"`
 }
 
