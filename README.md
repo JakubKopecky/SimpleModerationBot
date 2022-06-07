@@ -1,1 +1,1 @@
-Simple discord bot to learn Go language and Docker
+Simple discord bot to learn Go language
